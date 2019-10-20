@@ -32,7 +32,10 @@
         </main>
         <footer class="post__footer">
             <!-- Form -->
-            <app-comment-form></app-comment-form>
+            <app-comment-form
+                v-if="canAddComment"
+                @created="createCommentHandler"
+            ></app-comment-form>
 
             <div class="comments" v-if="true">
                 <app-comment 
@@ -51,6 +54,16 @@ import AppCommentForm from '~/components/main/CommentForm'
 export default {
     validate({ params }) {
         return Boolean(params.id)
+    },
+    data() {
+        return {
+            canAddComment: true
+        }
+    },
+    methods: {
+        createCommentHandler() {
+            this.canAddComment = false
+        }
     },
     components: {
         AppComment, AppCommentForm
