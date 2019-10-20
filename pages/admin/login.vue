@@ -67,29 +67,30 @@ export default {
             }
         };
     },
+    mounted() {
+        const { message } = this.$route.query
+        if ( message === 'login' ) {
+            this.$message.info('Для начала войдите в систему')
+        }
+    },
     methods: {
         onSubmit() {
             this.$refs.form.validate(async valid => {
                 if (valid) {
-                    this.loading=true
-
-                    const formData = {
-                        login: this.controls.login,
-                        password: this.controls.password
-                    }
+                    this.loading = true
 
                     try {
+                        const formData = {
+                            login: this.controls.login,
+                            password: this.controls.password
+                        }
                         await this.$store.dispatch('auth/login', formData)
                         this.$router.push('/admin')
                     } catch (e) {
-                        this.loading=false
+                        this.loading = false
                     }
-
-                } else {
-                    console.log('error submit!!')
-                    return false
                 }
-            });
+            })
         }
     }
 }
