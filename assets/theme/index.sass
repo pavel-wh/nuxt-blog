@@ -1,0 +1,27 @@
+::placeholder
+	color: #666
+
+::selection
+	background-color: rgba(0, 0, 0, .5)
+	color: #fff
+
+input, textarea
+	outline: none
+	&:focus:required:invalid
+		border-color: red
+	&:required:valid
+		border-color: green
+
+*
+	box-sizing: border-box
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.65
+	font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+	overflow-x: hidden
+	color: black
+	background-image: none
+	min-height: 100vh
