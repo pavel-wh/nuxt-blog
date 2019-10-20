@@ -17,7 +17,7 @@
         <div class="post__body">
             <img 
                 class="post__img"
-                src="https://itd1.mycdn.me/image?id=857070875208&t=20&plc=WEB&tkn=*MOLtmjXl4T1TWdjR_U-R9K7hgI8" 
+                src="https://saint-petersburg.ru/tilda/26756/images/f7b0a80d-f450-427d-83b1-990396b8e045__cxknadxghb0.jpg" 
                 alt="Post Image"
             >
         </div>
@@ -35,7 +35,8 @@
 export default {
     methods: {
         openPost() {
-            console.log('Open post')
+            const id="test-id"
+            this.$router.push(`/post/${ id }`)
         }
     }
 }
