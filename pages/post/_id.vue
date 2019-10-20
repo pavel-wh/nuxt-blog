@@ -30,12 +30,27 @@
             <p><span>Est doloremque ipsam ea repudiandae corrupti iste molestias magni, libero porro impedit deleniti perspiciatis ratione sint maiores unde sit qui possimus debitis deserunt neque nostrum. Iusto cum commodi architecto rem?</span><span>Porro enim natus quis ab perferendis ipsum, exercitationem sunt nihil distinctio, eveniet doloremque, fugiat modi expedita quam? Nulla aperiam recusandae porro earum nemo vel, atque, non hic eligendi ut fuga.</span></p>
             <p><span>Assumenda neque quidem culpa eaque! Laboriosam, nulla cupiditate eius omnis distinctio repellendus praesentium similique aliquam quod quibusdam numquam fugiat quis totam accusamus veniam quia itaque, rem ipsam consectetur velit dolorum?</span><span>Aliquam illo inventore dolore aut laboriosam laudantium consectetur quis eum doloribus possimus rerum ut, distinctio asperiores minus necessitatibus repellat eveniet nulla voluptatem deleniti quo itaque sequi optio. Nam, cum. Ab?</span></p>
         </main>
+        <footer class="post__footer">
+            <!-- Form -->
+            <div class="comments" v-if="true">
+                <app-comment 
+                    v-for="comment in 4"
+                    :key="comment"
+                    :comment="comment"
+                ></app-comment>
+            </div>
+            <p class="text-center" v-else>Комментариев нет</p>
+        </footer>
     </article>
 </template>
 <script>
+import AppComment from '~/components/main/Comment'
 export default {
     validate({ params }) {
         return Boolean(params.id)
+    },
+    components: {
+        AppComment
     }
 }
 </script>
