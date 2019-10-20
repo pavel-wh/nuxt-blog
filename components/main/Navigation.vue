@@ -10,5 +10,5 @@
         align-items: center
         justify-content: center
         height: 100%
-        border-bottom: 1px solid #f6f6f6
+        border-bottom: 2px solid #f6f6f6
 </style>
