@@ -32,6 +32,8 @@
         </main>
         <footer class="post__footer">
             <!-- Form -->
+            <app-comment-form></app-comment-form>
+
             <div class="comments" v-if="true">
                 <app-comment 
                     v-for="comment in 4"
@@ -45,12 +47,13 @@
 </template>
 <script>
 import AppComment from '~/components/main/Comment'
+import AppCommentForm from '~/components/main/CommentForm'
 export default {
     validate({ params }) {
         return Boolean(params.id)
     },
     components: {
-        AppComment
+        AppComment, AppCommentForm
     }
 }
 </script>
