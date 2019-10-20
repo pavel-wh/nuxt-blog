@@ -15,7 +15,7 @@
             </el-form-item>
 
             <el-form-item label="Пароль" prop="password" class="mb2">
-                <el-input v-model.trim="controls.password"></el-input>
+                <el-input v-model.trim="controls.password" type="password"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button 
@@ -69,20 +69,19 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.$refs.form.validate((valid) => {
+            this.$refs.form.validate(async valid => {
                 if (valid) {
                     this.loading=true
 
                     const formData = {
-                        name: this.controls.name,
-                        text: this.controls.text
+                        login: this.controls.login,
+                        password: this.controls.password
                     }
 
                     try {
-                        this.$emit('created')
-                        this.$message.success('Комментарий добавлен')
+                        await this.$store.dispatch('auth/login', formData)
+                        this.$router.push('/admin')
                     } catch (e) {
-                        console.log(e)
                         this.loading=false
                     }
 
