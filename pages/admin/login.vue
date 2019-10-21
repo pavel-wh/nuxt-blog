@@ -95,7 +95,6 @@ export default {
                         this.$router.push('/admin')
 
                     } catch (e) {
-                        console.log(e, 'err')
                         this.loading = false
                     }
                 }
