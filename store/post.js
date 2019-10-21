@@ -46,9 +46,6 @@ export const actions = {
             }, 2020)
         })
     },
-    async remove({}, id) {
-
-    },
     async fetchAdminById({}, id) {
         return await new Promise(resolve => {
             setTimeout(() => {
@@ -56,9 +53,27 @@ export const actions = {
             }, 1010)
         })
     },
+    async create({}, { title, text }) {
+        return await new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, 1010)
+        })
+    },
     async update({}, { id, text }) {
-
-    }
+        return await new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, 1010)
+        })
+    },
+    async remove({}, id) {
+        return await new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, 1010)
+        })
+    },
 }
 
 export const getters = {

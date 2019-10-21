@@ -89,7 +89,7 @@
                             }
                             await this.$store.dispatch('auth/createUser', formData)
                             this.$message.success('Новый пользователь успешно создан')
-                            this.$refs[form].resetFields()
+                            this.$refs.form.resetFields()
                             this.loading = false
 
                         } catch (e) {

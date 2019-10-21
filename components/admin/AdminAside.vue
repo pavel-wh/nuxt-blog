@@ -5,6 +5,9 @@
                 :default-active="$route.path"
                 router
             >
+                <el-menu-item disabled align="center">
+                    <span>Админка</span>
+                </el-menu-item>
                 <el-menu-item index="/admin">
                     <i class="el-icon-data-analysis"></i>
                     <span>Аналитика</span>
