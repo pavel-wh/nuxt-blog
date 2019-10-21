@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
     .admin
         width: 100%
         height: 100vh

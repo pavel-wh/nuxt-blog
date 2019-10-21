@@ -11,10 +11,9 @@ export const mutations = {
 export const actions = {
     async login({ commit, dispatch }, formData) {
         const token = await new Promise(resolve => {
-            () => resolve('mock-token')
+            setTimeout(() => resolve('mock-token'), 2000)
         })
         dispatch('setToken', token)
-        console.log(token)
     },
     setToken({ commit }, token) {
         commit('setToken', token)
@@ -23,5 +22,5 @@ export const actions = {
 }
 
 export const getters = {
-    isAuthenticated: state => Boolean(state.token)
+    isAuth: state => Boolean(state.token)
 }

@@ -70,7 +70,7 @@ export default {
     mounted() {
         const { message } = this.$route.query
         if ( message === 'login' ) {
-            this.$message.info('Для начала войдите в систему')
+            this.$message.info('Для начала войдите в систему!')
         }
     },
     methods: {
@@ -85,8 +85,11 @@ export default {
                             password: this.controls.password
                         }
                         await this.$store.dispatch('auth/login', formData)
+
                         this.$router.push('/admin')
+
                     } catch (e) {
+                        console.log(e, 'err')
                         this.loading = false
                     }
                 }
