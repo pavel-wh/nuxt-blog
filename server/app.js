@@ -8,9 +8,10 @@ const app = express()
 mongoose.connect(keys.MONGO_URI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
+        useCreateIndex: true
     })
-        .then(() => console.log('MongoDB connected...'))
-        .catch(error => console.log(error))
+    .then(() => console.log('MongoDB connected...'))
+    .catch(error => console.log(error))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
