@@ -70,7 +70,7 @@ function isJWTValid(token) {
     }
 
     const jwtData = jwtDecode(token) || {}
-    const expites = jwtData.exp || 0
+    const expires = jwtData.exp || 0
 
     return (new Date().getTime() / 1000) < expires
 }
