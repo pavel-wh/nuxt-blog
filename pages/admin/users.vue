@@ -30,7 +30,7 @@
                 controls: {
                     login: '',
                     password: '',
-                    accountType: 2
+                    accountType: null
                 },
                 rules: {
                     login: [{

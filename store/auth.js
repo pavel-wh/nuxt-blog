@@ -15,7 +15,6 @@ export const actions = {
     async login({ commit, dispatch }, formData) {
         try {
             const { token } = await this.$axios.$post('/api/auth/admin/login', formData)
-            console.log(token)
             dispatch('setToken', token)
         } catch (e) {
             commit('setError', e, { root: true })
@@ -31,14 +30,17 @@ export const actions = {
         }
     },
     setToken({ commit }, token) {
+        this.$axios.setToken(token, 'Bearer')
         commit('setToken', token)
     },
     logout({ commit }) {
         commit('clearToken')
+        this.$axios.setToken(false)
     }
 
 }
 
 export const getters = {
-    isAuth: state => Boolean(state.token)
+    isAuth: state => Boolean(state.token),
+    token: state => state.token
 }
