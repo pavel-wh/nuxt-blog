@@ -10,6 +10,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minlength: 8
+    },
+    accountType: {
+        type: Number,
+        required: true
     }
 })
 

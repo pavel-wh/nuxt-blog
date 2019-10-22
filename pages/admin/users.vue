@@ -9,8 +9,9 @@
         </el-form-item>
         <el-form-item label="Тип аккаунта" prop="accountType" >
             <el-radio-group v-model="controls.accountType">
-                <el-radio label="Клиент" border></el-radio>
-                <el-radio label="Партнёр" border></el-radio>
+                <el-radio label="2" border>Клиент</el-radio>
+                <el-radio label="1" border>Партнёр</el-radio>
+                <el-radio label="0" border>Админ</el-radio>
             </el-radio-group>
         </el-form-item>
         <el-form-item>
@@ -29,7 +30,7 @@
                 controls: {
                     login: '',
                     password: '',
-                    accountType: 'Клиент'
+                    accountType: 2
                 },
                 rules: {
                     login: [{
@@ -58,7 +59,7 @@
                     ],
                     accountType: [{
                             required: true,
-                            message: 'Пожалуйста выберите тип аккаунта',
+                            message: 'Пожалуйста выберите тип пользователя',
                             trigger: 'change'
                     }],
                 }

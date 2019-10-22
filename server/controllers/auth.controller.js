@@ -34,7 +34,8 @@ module.exports.create = async (req, res) => {
 
         const user = new User({
             login: req.body.login,
-            password: bcrypt.hashSync(req.body.password, salt)
+            password: bcrypt.hashSync(req.body.password, salt),
+            accountType: req.body.accountType
         })
 
         await user.save()
