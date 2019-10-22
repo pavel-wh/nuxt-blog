@@ -53,12 +53,21 @@ export const actions = {
             }, 1010)
         })
     },
-    async create({}, { title, text }) {
-        return await new Promise(resolve => {
-            setTimeout(() => {
-                resolve()
-            }, 1010)
-        })
+    async create({ commit }, { title, text, image }) {
+        try {
+            const fd = new FormData()
+            fd.append('title', title)
+            fd.append('text', text)
+            fd.append('image', image, image.name)
+            return await new Promise(resolve => {
+                setTimeout(() => {
+                    resolve()
+                }, 1010)
+            })
+        } catch (e) {
+            commit('setErorr', e, { root: true })
+            throw e
+        }
     },
     async update({}, { id, text }) {
         return await new Promise(resolve => {
