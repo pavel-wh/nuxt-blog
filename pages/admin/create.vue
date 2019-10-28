@@ -10,7 +10,7 @@
         >
             <el-form-item label="Введите название поста" prop="title">
                 <el-input 
-                    v-model.trim="controls.title"
+                    v-model="controls.title"
                 ></el-input>
             </el-form-item>
             <el-form-item label="Введите текст в формате .md или .html" prop="text">
@@ -75,6 +75,7 @@ export default {
     middleware: ['admin-auth'],
     data() {
         return {
+            image: null,
             loading: false,
             previewDialog: false,
             controls: {
@@ -99,25 +100,26 @@ export default {
     },
     methods: {
         handleImageChange(file, fileList) {
-            this.image = file.raw
+            this.image = fileList[0].raw
         },
         onSubmit() {
             this.$refs.form.validate(async valid => {
                 if (valid && this.image) {
                     this.loading = true
-                    const formData = {
-                        title: this.controls.title,
-                        text: this.controls.text,
-                        image: this.image
-                    }
 
                     try {
+                        const formData = {
+                            title: this.controls.title,
+                            text: this.controls.text,
+                            image: this.image
+                        }
                         await this.$store.dispatch('post/create', formData)
                         this.image = null
                         this.$refs.upload.clearFiles()
                         this.$refs.form.resetFields()
                         this.$message.success('Пост создан')
                     } catch (e) {
+                        console.log(e)
                     } finally {
                         this.loading = false
                     }

@@ -30,14 +30,6 @@ const posts = [
     }
 ]
 
-export const state = () => ({
-
-})
-
-export const mutations = {
-
-}
-
 export const actions = {
     async fetchAdmin({}) {
         return await new Promise(resolve => {
@@ -59,13 +51,10 @@ export const actions = {
             fd.append('title', title)
             fd.append('text', text)
             fd.append('image', image, image.name)
-            return await new Promise(resolve => {
-                setTimeout(() => {
-                    resolve()
-                }, 1010)
-            })
+            console.log(image)
+            return await this.$axios.$post('/api/post/admin', fd)
         } catch (e) {
-            commit('setErorr', e, { root: true })
+            commit('setError', e, { root: true })
             throw e
         }
     },
@@ -82,9 +71,5 @@ export const actions = {
                 resolve()
             }, 1010)
         })
-    },
-}
-
-export const getters = {
-
+    }
 }
