@@ -2,7 +2,7 @@
     <article class="post">
         <header class="post__header">
             <div class="post__title">
-                <h1>Post title</h1>
+                <h1>{{ post.title }}</h1>
                 <nuxt-link to="/">
                     <i class="el-icon-back"></i>
                 </nuxt-link>
@@ -10,37 +10,38 @@
             <div class="post__info">
                 <small>
                     <i class="el-icon-time"></i>
-                    {{ new Date().toLocaleString() }}
+                    {{ post.date }}
                 </small>
                 <small>
                     <i class="el-icon-view"></i>
-                    42
+                    {{ post.views }}
                 </small>
             </div>
             <div class="post__image">
                 <img 
                     class="post__img"
-                    src="https://saint-petersburg.ru/tilda/26756/images/f7b0a80d-f450-427d-83b1-990396b8e045__cxknadxghb0.jpg" 
-                    alt="Post Image"
+                    :src="post.imageUrl" 
+                    :alt="post.title"
                 >
             </div>
         </header>
         <main class="post__content">
-            <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae nemo velit? Odit recusandae consequuntur optio accusamus rem, tenetur at, doloremque ab numquam doloribus quisquam, repellendus officiis laboriosam maxime exercitationem.</span><span>Non dolore mollitia pariatur inventore soluta tempora ipsum facilis quae architecto ex iure distinctio harum, in fugit excepturi ut minus debitis, officia omnis vel earum commodi! Animi sit nulla quibusdam?</span></p>
-            <p><span>Est doloremque ipsam ea repudiandae corrupti iste molestias magni, libero porro impedit deleniti perspiciatis ratione sint maiores unde sit qui possimus debitis deserunt neque nostrum. Iusto cum commodi architecto rem?</span><span>Porro enim natus quis ab perferendis ipsum, exercitationem sunt nihil distinctio, eveniet doloremque, fugiat modi expedita quam? Nulla aperiam recusandae porro earum nemo vel, atque, non hic eligendi ut fuga.</span></p>
-            <p><span>Assumenda neque quidem culpa eaque! Laboriosam, nulla cupiditate eius omnis distinctio repellendus praesentium similique aliquam quod quibusdam numquam fugiat quis totam accusamus veniam quia itaque, rem ipsam consectetur velit dolorum?</span><span>Aliquam illo inventore dolore aut laboriosam laudantium consectetur quis eum doloribus possimus rerum ut, distinctio asperiores minus necessitatibus repellat eveniet nulla voluptatem deleniti quo itaque sequi optio. Nam, cum. Ab?</span></p>
+            <vue-markdown>
+                {{ post.text }}
+            </vue-markdown>
         </main>
         <footer class="post__footer">
             <!-- Form -->
             <app-comment-form
                 v-if="canAddComment"
                 @created="createCommentHandler"
+                :postId="post._id"
             ></app-comment-form>
 
-            <div class="comments" v-if="true">
+            <div class="comments" v-if="post.comments.length">
                 <app-comment 
-                    v-for="comment in 4"
-                    :key="comment"
+                    v-for="comment in post.comments"
+                    :key="comment._id"
                     :comment="comment"
                 ></app-comment>
             </div>
@@ -55,13 +56,23 @@ export default {
     validate({ params }) {
         return Boolean(params.id)
     },
+    async asyncData({ store, params }) {
+        const post = await store.dispatch('post/fetchById', params.id)
+        await store.dispatch('post/addView', post)
+        return { 
+            post: {
+                ...post, views: ++post.views
+            } 
+        }
+    },
     data() {
         return {
             canAddComment: true
         }
     },
     methods: {
-        createCommentHandler() {
+        createCommentHandler(comment) {
+            this.post.comments.unshift(comment)
             this.canAddComment = false
         }
     },

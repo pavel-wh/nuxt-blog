@@ -1,3 +1,5 @@
+const path = require('path')
+const fs = require('fs')
 
 module.exports = {
   mode: 'universal',
@@ -20,6 +22,25 @@ module.exports = {
   */
   loading: { color: '#dd6161' },
   /*
+  ** Server config
+  */
+  // server: {
+  //   port: 8000, // default: 3000
+  //   host: '0.0.0.0' // default: localhost
+  // },
+  // server: {
+  //   port: 8000, // default: 3000
+  //   host: '0.0.0.0', // default: localhost
+  //   https: {
+  //     key: fs.readFileSync(path.resolve(__dirname, './server/server.key')),
+  //     cert: fs.readFileSync(path.resolve(__dirname, './server/server.crt'))
+  //   }
+  // },
+  // serverMiddleware: [
+  //   // Will register redirect-ssl npm package
+  //   'redirect-ssl'
+  // ],
+  /*
   ** Global CSS
   */
   css: [
@@ -37,8 +58,10 @@ module.exports = {
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [
-  ],
+  // buildModules: [
+  //   // Doc: https://axios.nuxtjs.org/usage
+  //   '@nuxtjs/axios',
+  // ],
   /*
   ** Nuxt.js modules
   */
@@ -51,6 +74,10 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+    // proxy: true,
+    // proxyHeaders: true,
+    // credentials: false
   },
   /*
   ** Build configuration

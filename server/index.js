@@ -1,4 +1,10 @@
 const consola = require('consola')
+// const fs = require('fs')
+// const path = require('path')
+// const https = require('https')
+// const redirectSSL = require('redirect-ssl')
+
+
 const { Nuxt, Builder } = require('nuxt')
 const app = require('./app')
 
@@ -21,6 +27,7 @@ async function start () {
   }
 
   // Give nuxt middleware to express
+  // app.use(redirectSSL)
   app.use(nuxt.render)
 
   // Listen the server
@@ -30,5 +37,11 @@ async function start () {
       badge: true
     })
   })
+
+  // https.createServer({
+  //   key: fs.readFileSync(path.resolve(__dirname, './server.key')),
+  //   cert: fs.readFileSync(path.resolve(__dirname, './server.crt'))
+  // }, app)
+  
 }
 start()

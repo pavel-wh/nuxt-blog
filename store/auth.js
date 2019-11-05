@@ -39,8 +39,8 @@ export const actions = {
         Cookies.set('jwt-token', token)
     },
     logout({ commit }) {
-        commit('clearToken')
         this.$axios.setToken(false)
+        commit('clearToken')
         Cookies.remove('jwt-token')
     },
     autoLogin({ dispatch }) {

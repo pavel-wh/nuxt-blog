@@ -1,11 +1,10 @@
 const Post = require('../models/post.model')
 
 module.exports.create = async (req, res) => {
-    console.log('PostControler', req.file.filename)
     const post = new Post({
         title: req.body.title,
         text: req.body.text,
-        imageUrl: '/' + req.file.filename
+        imageUrl: '/images/posts/' + req.file.filename
     })
     try {
         await post.save()
@@ -38,7 +37,8 @@ module.exports.update = async (req, res) => {
         text: req.body.text
     }
     try {
-        const post = await Post.findOneAndUpdate({ _id: req.params.id }, { $set }, { new: true })
+        const post = await Post.findOneAndUpdate({ 
+            _id: req.params.id }, { $set }, { new: true })
         res.json(post)
     } catch (e) {
         res.status(500).json(e)

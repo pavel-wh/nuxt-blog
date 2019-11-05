@@ -59,6 +59,9 @@ export default {
         const post = await store.dispatch('post/fetchAdminById', params.id)
         return { post }
     },
+    mounted() {
+        this.controls.text = this.post.text
+    },
     data() {
         return {
             loading: false,
