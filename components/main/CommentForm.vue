@@ -69,7 +69,7 @@
         },
         methods: {
             onSubmit() {
-                this.$refs.form.validate( async valid => {
+                this.$refs.form.validate(async valid => {
                     if (valid) {
                         this.loading=true
 

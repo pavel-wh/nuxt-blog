@@ -14,24 +14,6 @@ module.exports.create = async (req, res) => {
     }
 }
 
-module.exports.getAll = async (req, res) => {
-    try {
-        const posts = await Post.find().sort({ date: -1 })
-    } catch (e) {
-        res.status(500).json(e)
-    }
-}
-
-module.exports.getById = async (req, res) => {
-    try {
-        await Post.findById(req.params.id).populate('comments').exec((error, post) => {
-            res.json(post)
-        })
-    } catch (e) {
-        res.status(500).json(e)
-    }
-}
-
 module.exports.update = async (req, res) => {
     const $set = {
         text: req.body.text
@@ -54,18 +36,61 @@ module.exports.remove = async (req, res) => {
     }
 }
 
-module.exports.addView = async (req, res) => {
-    const $set = {
-        views: ++req.body.views
-    }
+module.exports.getAll = async (req, res) => {
     try {
-        await Post.deleteOne.findOneAndUpdate({
+        const posts = await Post
+            .find()
+            .sort({ date: -1 })
+        res.json(posts)
+    } catch (e) {
+        res.status(500).json(e)
+    }
+}
+
+module.exports.getById = async (req, res) => {
+    try {
+        await Post.findById(req.params.id).populate('comments')
+            .exec((error, post) => {
+                res.json(post)
+            })
+    } catch (e) {
+        res.status(500).json(e)
+    }
+}
+
+module.exports.addView = async (req, res) => {
+    try {
+        const $set = {
+            views: ++req.body.views
+        }
+        await Post.findOneAndUpdate({
             _id: req.params.id
         }, {
             $set
         })
-        res.status(204).json(post)
+        res.status(204).json()
     } catch (e) {
         res.status(500).json(e)
     }
+}
+
+module.exports.getAnalytics = async (req, res) => {
+  try {
+    const posts = await Post.find().sort({date: -1})
+
+    const data = {
+      comments: {
+        labels: posts.map(post => post.title),
+        data: posts.map(post => post.comments.length)
+      },
+      views: {
+        labels: posts.map(post => post.title),
+        data: posts.map(post => post.views)
+      }
+    }
+
+    res.json(data)
+  } catch (e) {
+    res.status(500).json(e)
+  }
 }

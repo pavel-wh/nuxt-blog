@@ -10,7 +10,7 @@
             <div class="post__info">
                 <small>
                     <i class="el-icon-time"></i>
-                    {{ post.date }}
+                    {{ new Date(post.date).toLocaleString() }}
                 </small>
                 <small>
                     <i class="el-icon-view"></i>
@@ -26,9 +26,7 @@
             </div>
         </header>
         <main class="post__content">
-            <vue-markdown>
-                {{ post.text }}
-            </vue-markdown>
+            <vue-markdown>{{ post.text }}</vue-markdown>
         </main>
         <footer class="post__footer">
             <!-- Form -->

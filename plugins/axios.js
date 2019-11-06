@@ -1,5 +1,7 @@
 export default function ({ $axios, redirect, store }) {
-
+    if (process.server) {
+        $axios.setHeader('accept-encoding', '*')
+    }
     // $axios.onRequest(config => {
     //     console.log('Making request to ' + config.url)
     // })
@@ -12,14 +14,9 @@ export default function ({ $axios, redirect, store }) {
     // $axios.onResponseError(err => {
     //     console.log('Making request response error to ' + err)
     // })
-
     $axios.interceptors.request.use(request => {
-        // request.headers.common['Cache-Control'] = 'no-cache, no-store, no-transform'
         if (store.getters['auth/isAuth'] && !request.headers.common['Authorization']) {
-            const token = store.getters['auth/token']
-            request.headers.common['Authorization'] = `Bearer ${ token }`
-            // request.headers.common['Access-Control-Allow-Methods'] = `GET, POST, OPTIONS`
-            // request.headers.common['Access-Control-Allow-Origin'] = `*`
+            request.headers.common['Authorization'] = `Bearer ${ store.getters['auth/token'] }`
         }
 
         return request

@@ -13,17 +13,17 @@ const postSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    views: {
-        type: Number,
-        default: 0
+    imageUrl: {
+      type: String
     },
-    imageUrl: String,
-    comments: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'comments'
-        }
-    ]
+    views: {
+      type: Number,
+      default: 0
+    },
+    comments: [{
+      type: Schema.Types.ObjectId,
+      ref: 'comments'
+    }]
 })
 
 module.exports = model('posts', postSchema)

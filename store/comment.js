@@ -1,12 +1,6 @@
-import { create } from "domain";
-
 export const actions = {
-    async create({ commit }, data) {
-        try {
-            return await this.$axios.$post('/api/comment', data)
-        } catch (e) {
-            commit('setError', e, { root: true })
-            throw e
-        }
+    async create({dispatch}, comment) {
+      return await this.$axios.$post('/api/comment', comment)
     }
 }
+  
