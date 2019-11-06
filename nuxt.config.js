@@ -68,7 +68,17 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/pwa',
   ],
+  /* https://pwa.nuxtjs.org/ */
+  pwa: {
+    workbox: {
+      /* workbox options */
+    },
+    meta: {
+      /* meta options */
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -78,6 +88,9 @@ module.exports = {
     // proxy: true,
     // proxyHeaders: true,
     // credentials: false
+  },
+  env: {
+    appName: 'My first SSR app'
   },
   /*
   ** Build configuration

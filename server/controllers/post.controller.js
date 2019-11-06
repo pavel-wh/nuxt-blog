@@ -16,6 +16,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     const $set = {
+        title: req.body.title,
         text: req.body.text
     }
     try {

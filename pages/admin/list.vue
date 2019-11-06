@@ -1,14 +1,14 @@
 <template>
     <section>
         <h1>Список постов</h1>
-        <!-- <el-table :data="posts.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase()))" style="width: 100%">
+        <el-table :data="posts.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase()))" style="width: 100%">
             <el-table-column label="Название" prop="title">
             </el-table-column>
             <el-table-column label="Дата">
                 <template slot-scope="{ row: { date }}">
                     <small>
                         <i class="el-icon-time"></i>
-                        {{ new Date(date).toLocaleString() }}
+                        {{ date | date }}
                     </small>
                 </template>
             </el-table-column>
@@ -29,12 +29,12 @@
                 </template>
             </el-table-column>
             <el-table-column align="right">
-                <template slot="header">
+                <!-- <template slot="header">
                     <el-input
                         v-model="search"
                         size="mini"
                         placeholder="Поиск"/>
-                </template>
+                </template> -->
 
                 <template slot-scope="scope">
                     <el-tooltip class="item" effect="dark" content="Редактировать пост" placement="top">
@@ -53,56 +53,6 @@
                     </el-tooltip>
                 </template>
             </el-table-column>
-        </el-table> -->
-        <el-table
-        :data="posts"
-        style="width: 100%">
-            <el-table-column
-                prop="title"
-                label="Название"
-            />
-            <el-table-column
-                label="Дата"
-            >
-                <template slot-scope="{row: {date}}">
-                <i class="el-icon-time"></i>
-                <span style="margin-left: 10px">{{ new Date(date).toLocaleString() }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                label="Просмотры"
-                prop="views"
-            />
-            <el-table-column
-                label="Комментарии"
-            >
-                <template slot-scope="{row}">
-                <i class="el-icon-tickets"></i>
-                <span style="margin-left: 10px">{{ row.comments.length }}</span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                label="Действия"
-            >
-                <template slot-scope="{row}">
-                <el-tooltip effect="dark" content="Редактировать" placement="top-start">
-                    <el-button
-                    type="primary"
-                    icon="el-icon-edit"
-                    circle
-                    @click="open(row._id)"
-                    />
-                </el-tooltip>
-                <el-tooltip effect="dark" content="Удалить" placement="top-start">
-                    <el-button
-                    type="danger"
-                    icon="el-icon-delete"
-                    circle
-                    @click="remove(row._id)"
-                    />
-                </el-tooltip>
-                </template>
-            </el-table-column>
         </el-table>
     </section>
 </template>
@@ -113,7 +63,7 @@
         middleware: ['admin-auth'],
         // data() {
         //     return {
-        //         search: ''
+        //         search: null
         //     }
         // },
         async asyncData({ store }) {

@@ -1,9 +1,9 @@
 <template>
     <section class="post">
-        <h1>Post {{ post.title }}</h1>
+        <h1>{{ controls.title }}</h1>
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/admin/list' }">Посты</el-breadcrumb-item>
-            <el-breadcrumb-item>Пост {{ post.title }}</el-breadcrumb-item>
+            <el-breadcrumb-item>Пост {{ controls.title }}</el-breadcrumb-item>
         </el-breadcrumb>
 
         <el-form 
@@ -12,10 +12,15 @@
             ref="form"
             @submit.native.prevent="onSubmit"
         >
+            <el-form-item label="Текст заголовка" prop="title">
+                <el-input 
+                    v-model="controls.title"
+                ></el-input>
+            </el-form-item>
             <el-form-item label="Текст в формате .md или .html" prop="text">
                 <el-input 
                     type="textarea"
-                    v-model.trim="controls.text"
+                    v-model="controls.text"
                     resize="none"
                     :rows="10"
                 ></el-input>
@@ -23,7 +28,7 @@
             <div class="mb2">
                 <small>
                     <i class="el-icon-time"></i>
-                    {{ new Date(post.date).toLocaleString() }}
+                    {{ post.date | date }}
                 </small>
                 <small class="ml">
                     <i class="el-icon-view"></i>
@@ -49,7 +54,7 @@ export default {
     middleware: ['admin-auth'],
     head() {
         return {
-            title: `Пост | ${ this.post.title }`
+            title: `${ this.post.title } | ${ process.env.appName }`
         }
     },
     validate({ params }) {
@@ -60,19 +65,26 @@ export default {
         return { post }
     },
     mounted() {
+        this.controls.title = this.post.title
         this.controls.text = this.post.text
     },
     data() {
         return {
             loading: false,
             controls: {
+                title: '',
                 text: '',
             },
             rules: {
+                title: [{
+                    required: true,
+                    message: 'Поле не должно быть пустым',
+                    trigger: 'blur'
+                }],
                 text: [{
-                        required: true,
-                        message: 'Поле не должно быть пустым',
-                        trigger: 'blur'
+                    required: true,
+                    message: 'Поле не должно быть пустым',
+                    trigger: 'blur'
                     }
                 ],
             }
@@ -85,6 +97,7 @@ export default {
                     this.loading = true
                     const formData = {
                         id: this.post._id,
+                        title: this.controls.title,
                         text: this.controls.text
                     }
 

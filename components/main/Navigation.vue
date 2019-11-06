@@ -1,8 +1,18 @@
 <template>
     <nav>
-        <h1>SSR Blog</h1>
+        <h1>{{ appName }}</h1>
     </nav>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            appName: process.env.appName
+        }
+    }
+}
+</script>
 
 <style lang="sass" scoped>
     nav

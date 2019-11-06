@@ -10,7 +10,7 @@
     import AppAnalyticsChart from '@/components/admin/AnalyticsChart'
     export default {
         head: {
-            title: `Статистика | ${process.env.appName}`
+            title: `Аналитика | ${process.env.appName}`
         },
         middleware: ['admin-auth'],
         layout: 'admin',
