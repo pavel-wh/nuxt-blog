@@ -90,7 +90,7 @@ sw.*
 *.swp
 
 # static images files in app
-static/images/
+# static/images/
 
 # keys dev
 server/keys/keys.dev.js
