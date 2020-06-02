@@ -4,7 +4,6 @@ const consola = require('consola')
 // const https = require('https')
 // const redirectSSL = require('redirect-ssl')
 
-
 const { Nuxt, Builder } = require('nuxt')
 const app = require('./app')
 
@@ -12,7 +11,7 @@ const app = require('./app')
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
-async function start () {
+async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
 
@@ -42,6 +41,5 @@ async function start () {
   //   key: fs.readFileSync(path.resolve(__dirname, './server.key')),
   //   cert: fs.readFileSync(path.resolve(__dirname, './server.crt'))
   // }, app)
-  
 }
 start()
