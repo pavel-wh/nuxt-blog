@@ -29,5 +29,4 @@ export default {
         display: flex
         justify-content: space-between
         margin-bottom: .5rem
-    &__text
 </style>

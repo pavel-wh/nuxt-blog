@@ -25,4 +25,6 @@ nav
     border-bottom: 2px solid #f6f6f6
     a
         text-decoration: none
+        strong
+            text-transform: uppercase
 </style>
