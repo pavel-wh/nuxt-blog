@@ -22,7 +22,7 @@ npm install
 
 - Sign in to [mongodb](https://account.mongodb.com/account) Create project, build cluster and create database.
 
-- Create keys.dev.js in `./server/keys/` folder for local dev
+- Create keys.dev.js in `./server/keys/` folder with code below and remove `app.use(sslRedirect())` from `./server/app.js` for local dev
 
 ```bash
 module.exports = {
