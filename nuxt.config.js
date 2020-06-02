@@ -24,11 +24,13 @@ module.exports = {
    */
   loading: { color: '#dd6161' },
   /*
-  ** Server config
+   ** Server config
+   */
   server: {
-    port: 8000, // default: 3000
+    port: 3000, // default: 3000
     host: '0.0.0.0' // default: localhost
   },
+  /*
   server: {
     port: 8000, // default: 3000
     host: '0.0.0.0', // default: localhost
@@ -83,7 +85,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.BASE_URL //  || 'http://localhost:3000'
+    baseURL: process.env.BASE_URL
     // proxy: true,
     // proxyHeaders: true,
     // credentials: false
