@@ -1,6 +1,6 @@
 # Blog App
 
-Blog App is a Node.js application with Express.js framework and Server Side Rendering from Nuxt.js.
+[Blog App](http://nuxt-bloger.herokuapp.com/) is a Node.js application with Express.js framework and Server Side Rendering from Nuxt.js.
 
 ## Clone repo
 
